@@ -876,14 +876,18 @@ body {
   margin-bottom: 8px;
 }
 
+.icon-row .weather-emoji {
+  font-size: 36px;
+  display: inline;
+  margin-bottom: 0;
+}
+
 .saved-locations {
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   backdrop-filter: var(--blur);
   border-radius: var(--card-radius);
   padding: 16px 20px;
-  margin-top: 0;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
 }
 
 .saved-header {
@@ -891,9 +895,9 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
-  font-size: 12px;
+  font-size: 11px;
   color: rgba(255,255,255,0.5);
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
@@ -912,9 +916,10 @@ body {
   border-radius: 10px;
   padding: 10px 14px;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
   font-size: 13px;
   color: white;
+  margin-bottom: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 .saved-city-item:hover {
   background: rgba(255,255,255,0.10);
@@ -942,16 +947,19 @@ body {
   border-radius: 8px;
   color: white;
   font-size: 16px;
-  width: 28px; height: 28px;
+  width: 28px;
+  height: 28px;
   cursor: pointer;
-  transition: background 0.2s;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-left: 8px;
   vertical-align: middle;
+  transition: background 0.2s;
 }
-.pin-btn:hover { background: rgba(255,79,163,0.3); }
+.pin-btn:hover {
+  background: rgba(255,79,163,0.3);
+}
 
 .saved-empty {
   font-size: 12px;
