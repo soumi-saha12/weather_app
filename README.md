@@ -99,7 +99,7 @@ interactions to create a premium user experience.
   <img src="./assets/images/desktop-screenshot.png" alt="Desktop Weather Dashboard" width="100%">
   <br><br>
   <h3>📱 Mobile View</h3>
-  <img src="./assets/images/mobile-screenshot.png" alt="Mobile Weather Dashboard" width="45%">
+  <img src="./assets/images/mobile-screenshot.png.jpeg" alt="Mobile Weather Dashboard" width="45%">
 </div>
 
 ### 💎 Glassmorphism Design
