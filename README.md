@@ -128,7 +128,7 @@ Mobile shows a compact glassmorphism dashboard layout.
 
 ```bash
 git clone https://github.com/soumi-saha12/weather_app.git
-cd weather-dashboard
+cd weather_app
 ```
 
 Open with VS Code Live Server:
