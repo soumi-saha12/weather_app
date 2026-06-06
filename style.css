@@ -867,6 +867,10 @@ body {
   .m-top-info {
     display: block;
   }
+
+  .m-detail-card {
+    display: none !important;
+  }
 }
 
 /* ── RESULTS LOAD ENTRANCE ANIMATIONS ── */
