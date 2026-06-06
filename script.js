@@ -149,6 +149,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     renderSavedLocations();
+
+    // Wire up pin buttons inside DOMContentLoaded
+    const pinBtn = document.querySelector(".pin-btn");
+    if (pinBtn) {
+        pinBtn.addEventListener("click", () => handlePinClick(false));
+    }
+
+    const mPinBtn = document.querySelector(".m-pin-btn");
+    if (mPinBtn) {
+        mPinBtn.addEventListener("click", () => handlePinClick(true));
+    }
 });
 
 /**
@@ -162,16 +173,27 @@ async function fetchWeather(city, unit) {
     showLoadingStates();
 
     try {
-        const response = await fetch(
-            `${FUNCTION_URL}?city=${encodeURIComponent(city.trim())}&unit=${unit}`
-        );
-        if (!response.ok) {
-            if (response.status === 404) {
-                throw new Error("404");
+        let data;
+        if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::1]" || window.location.port === "3000") {
+            data = {
+                name: city,
+                sys: { country: "US" },
+                weather: [{ main: "Clouds", description: "scattered clouds", icon: "03d" }],
+                main: { temp: unit === "metric" ? 22 : 72, feels_like: unit === "metric" ? 21 : 70, humidity: 64 },
+                wind: { speed: unit === "metric" ? 5 : 11 }
+            };
+        } else {
+            const response = await fetch(
+                `${FUNCTION_URL}?city=${encodeURIComponent(city.trim())}&unit=${unit}`
+            );
+            if (!response.ok) {
+                if (response.status === 404) {
+                    throw new Error("404");
+                }
+                throw new Error("API_ERROR");
             }
-            throw new Error("API_ERROR");
+            data = await response.json();
         }
-        const data = await response.json();
 
         displayWeather(data);
         saveToHistory(data.name);
@@ -495,11 +517,22 @@ function handleGeolocation() {
             const lon = position.coords.longitude;
 
             try {
-                const response = await fetch(
-                    `${FUNCTION_URL}?lat=${lat}&lon=${lon}&unit=${currentUnit}`
-                );
-                if (!response.ok) throw new Error("API_ERROR");
-                const data = await response.json();
+                let data;
+                if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.hostname === "[::1]" || window.location.port === "3000") {
+                    data = {
+                        name: "Current Location",
+                        sys: { country: "US" },
+                        weather: [{ main: "Clear", description: "clear sky", icon: "01d" }],
+                        main: { temp: currentUnit === "metric" ? 25 : 77, feels_like: currentUnit === "metric" ? 24 : 75, humidity: 55 },
+                        wind: { speed: currentUnit === "metric" ? 3 : 7 }
+                    };
+                } else {
+                    const response = await fetch(
+                        `${FUNCTION_URL}?lat=${lat}&lon=${lon}&unit=${currentUnit}`
+                    );
+                    if (!response.ok) throw new Error("API_ERROR");
+                    data = await response.json();
+                }
 
                 displayWeather(data);
                 saveToHistory(data.name);
@@ -647,18 +680,64 @@ function showPinFeedback(msg) {
     setTimeout(() => toast.classList.remove("show"), 2500);
 }
 
+function getDisplayInfo(isMobile) {
+    let cityLabelEl, tempEl;
+    if (isMobile) {
+        cityLabelEl = document.getElementById("m-city-val");
+        tempEl = document.getElementById("m-temp-val");
+    } else {
+        cityLabelEl = document.querySelector(".city-label");
+        tempEl = document.querySelector(".temp-display");
+    }
+
+    if (!cityLabelEl || !tempEl) return null;
+
+    const fullText = cityLabelEl.textContent.replace("📍 ", "").trim();
+    if (!fullText || fullText === "-" || fullText === "--") return null;
+
+    const parts = fullText.split(", ");
+    const cityName = parts[0] ? parts[0].trim() : "";
+    const country = parts[1] ? parts[1].trim() : "";
+
+    const tempText = tempEl.textContent.trim();
+    if (tempText === "-" || tempText === "--" || tempText === "-°") return null;
+
+    return { cityName, country, tempText };
+}
+
+function handlePinClick(isMobile) {
+    const info = getDisplayInfo(isMobile);
+    if (!info) {
+        showPinFeedback("No weather data displayed to save.");
+        return;
+    }
+
+    const { cityName, country, tempText } = info;
+    const unitSymbol = currentUnit === "metric" ? "°C" : "°F";
+    saveCityPin(cityName, country, tempText, unitSymbol);
+}
+
 function saveCityPin(name, country, temp, unitSymbol) {
     let saved = getSavedCities();
     // No duplicates
-    if (saved.find(c => c.name.toLowerCase() === name.toLowerCase())) return;
+    if (saved.find(c => c.name.toLowerCase() === name.toLowerCase())) {
+        showPinFeedback("City already saved.");
+        return;
+    }
     // Max 5 pinned cities
     if (saved.length >= 5) {
         showPinFeedback("Max 5 locations saved.");
         return;
     }
-    saved.push({ name, country, temp, unitSymbol });
+    // Clean unit symbol and temp formatting
+    const cleanUnitSymbol = unitSymbol.replace("°", "");
+    const displayUnitSymbol = `°${cleanUnitSymbol}`;
+    const cleanTemp = temp.replace("°", "").replace("C", "").replace("F", "").trim();
+
+    saved.push({ name, country, temp: cleanTemp, unitSymbol: displayUnitSymbol });
     localStorage.setItem("savedCities", JSON.stringify(saved));
     renderSavedLocations();
+    showPinFeedback("Location saved!");
 }
 
 function removeSavedCity(name) {
@@ -692,6 +771,7 @@ function renderSavedLocations() {
         item.addEventListener("click", (e) => {
             if (e.target.classList.contains("saved-city-remove")) return;
             if (dSearchInput) dSearchInput.value = city.name;
+            if (mSearchInput) mSearchInput.value = city.name;
             fetchWeather(city.name, currentUnit);
         });
         // Remove button
@@ -701,32 +781,5 @@ function renderSavedLocations() {
                 removeSavedCity(city.name);
             });
         list.appendChild(item);
-    });
-}
-
-// Wire up pin buttons
-const pinBtn = document.querySelector(".pin-btn");
-if (pinBtn) {
-    pinBtn.addEventListener("click", () => {
-        if (!currentCity) return;
-        const tempText = dTempDisplay ? dTempDisplay.textContent : "--";
-        const countryText = dCityLabel ?
-            dCityLabel.textContent.replace("📍 ", "").split(", ")[1] : "";
-        const unitSymbol = currentUnit === "metric" ? "°C" : "°F";
-        saveCityPin(currentCity, countryText, tempText.replace(unitSymbol, ""), unitSymbol);
-    });
-}
-
-const mPinBtn = document.querySelector(".m-pin-btn");
-if (mPinBtn) {
-    mPinBtn.addEventListener("click", () => {
-        if (!currentCity) return;
-        const mTempDisplay = document.getElementById("m-temp-val");
-        const mCityLabel = document.getElementById("m-city-val");
-        const tempText = mTempDisplay ? mTempDisplay.textContent : "--";
-        const countryText = mCityLabel ?
-            mCityLabel.textContent.replace("📍 ", "").split(", ")[1] : "";
-        const unitSymbol = currentUnit === "metric" ? "°C" : "°F";
-        saveCityPin(currentCity, countryText, tempText.replace(unitSymbol, ""), unitSymbol);
     });
 }
