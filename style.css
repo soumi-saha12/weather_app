@@ -729,28 +729,29 @@ body {
   color: white;
 }
 
-.m-main-card {
-  margin: 0 16px 12px;
+.m-top-info {
+  display: none;
+  margin: 16px 16px 12px;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(16px);
   border-radius: 16px;
   padding: 20px;
-  position: relative;
   box-sizing: border-box;
 }
 
-.m-city-label {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 4px;
+.m-city-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
 }
 
-.m-pin-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  margin-left: 0;
+.m-city-row .m-city-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 .m-temp-display {
@@ -761,31 +762,20 @@ body {
   line-height: 1;
 }
 
-.m-main-card .m-unit-toggle {
-  display: inline-block;
-  margin-top: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.7);
-  padding: 4px 14px;
-  cursor: pointer;
-}
-
-.m-icon-row {
+.m-condition-icon-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-top: 8px;
+  margin: 0 16px 16px;
 }
 
-.m-icon-row .weather-emoji {
+.m-condition-icon-row .weather-emoji {
   font-size: 32px;
   margin-bottom: 0;
+  display: inline-block;
 }
 
-.m-icon-row .m-icon-condition {
+.m-condition-icon-row .m-icon-condition {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
   text-transform: capitalize;
@@ -872,6 +862,10 @@ body {
     display: block;
     width: 100%;
     overflow-x: hidden;
+  }
+
+  .m-top-info {
+    display: block;
   }
 }
 

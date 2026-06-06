@@ -222,11 +222,12 @@ function displayWeather(data) {
     // Show/hide result sections
     if (contentGrid) contentGrid.style.display = "grid";
     
-    const mWeatherDisplayNew = document.querySelector(".m-main-card");
+    const mWeatherDisplayNew = document.querySelector(".m-top-info");
     const mDetailCardNew = document.querySelector(".m-detail-card");
     const mStatsRowNew = document.querySelector(".m-stats-row");
     const mConditionTitleNew = document.querySelector(".m-condition-title");
     const mConditionDescNew = document.querySelector(".m-condition-desc");
+    const mConditionIconRowNew = document.querySelector(".m-condition-icon-row");
     const mWeatherTagNew = document.querySelector(".m-weather-tag");
     const mEmojiNew = document.querySelector(".m-emoji");
     const mUpdatedNew = document.querySelector(".m-updated");
@@ -236,13 +237,14 @@ function displayWeather(data) {
     if (mStatsRowNew) mStatsRowNew.style.display = "flex";
     if (mConditionTitleNew) mConditionTitleNew.style.display = "block";
     if (mConditionDescNew) mConditionDescNew.style.display = "block";
+    if (mConditionIconRowNew) mConditionIconRowNew.style.display = "flex";
     if (mWeatherTagNew) mWeatherTagNew.style.display = "inline-block";
     if (mEmojiNew) mEmojiNew.style.display = "block";
     if (mUpdatedNew) mUpdatedNew.style.display = "block";
 
     const animatedEls = document.querySelectorAll(
         ".main-card, .detail-card, .condition-title, .condition-desc, .weather-tag, .bottom-stats, .stat-item, " +
-        ".m-main-card, .m-detail-card, .m-condition-title, .m-condition-desc, .m-weather-tag, .m-stats-row, .m-stat-item"
+        ".m-top-info, .m-detail-card, .m-condition-title, .m-condition-desc, .m-condition-icon-row, .m-weather-tag, .m-stats-row, .m-stat-item"
     );
     animatedEls.forEach(el => {
         el.style.animation = "none";
@@ -403,11 +405,12 @@ function showError(message) {
 
     // Hide result panels
     if (contentGrid) contentGrid.style.display = "none";
-    const mWeatherDisplayNew = document.querySelector(".m-main-card");
+    const mWeatherDisplayNew = document.querySelector(".m-top-info");
     const mDetailCardNew = document.querySelector(".m-detail-card");
     const mStatsRowNew = document.querySelector(".m-stats-row");
     const mConditionTitleNew = document.querySelector(".m-condition-title");
     const mConditionDescNew = document.querySelector(".m-condition-desc");
+    const mConditionIconRowNew = document.querySelector(".m-condition-icon-row");
     const mWeatherTagNew = document.querySelector(".m-weather-tag");
     const mEmojiNew = document.querySelector(".m-emoji");
     const mUpdatedNew = document.querySelector(".m-updated");
@@ -417,6 +420,7 @@ function showError(message) {
     if (mStatsRowNew) mStatsRowNew.style.display = "none";
     if (mConditionTitleNew) mConditionTitleNew.style.display = "none";
     if (mConditionDescNew) mConditionDescNew.style.display = "none";
+    if (mConditionIconRowNew) mConditionIconRowNew.style.display = "none";
     if (mWeatherTagNew) mWeatherTagNew.style.display = "none";
     if (mEmojiNew) mEmojiNew.style.display = "none";
     if (mUpdatedNew) mUpdatedNew.style.display = "none";

@@ -167,6 +167,15 @@
         <div class="loading-spinner" id="mobile-loading"></div>
         <div class="error-msg" id="mobile-error"></div>
 
+        <!-- Mobile-only top weather info -->
+        <div class="m-top-info">
+            <div class="m-city-row">
+                <span class="m-city-label" id="m-city-val">📍 -</span>
+                <button class="pin-btn m-pin-btn" title="Save this location">＋</button>
+            </div>
+            <div class="m-temp-display" id="m-temp-val">-</div>
+        </div>
+
         <!-- Weather tag -->
         <div class="m-weather-tag" id="m-weather-tag">Weather Forecast</div>
 
@@ -178,6 +187,12 @@
 
         <!-- Description -->
         <p class="m-condition-desc" id="m-desc-val">-</p>
+
+        <!-- Mobile-only condition icon + label -->
+        <div class="m-condition-icon-row">
+            <span class="weather-emoji" id="m-mobile-emoji-label"></span>
+            <span class="m-icon-condition" id="m-icon-condition-val">-</span>
+        </div>
 
         <!-- Stats row -->
         <div class="m-stats-row">
@@ -195,18 +210,6 @@
                 <span>🌡️</span>
                 <span class="m-stat-label">Feels Like</span>
                 <span class="m-stat-value" id="m-feels-val">-</span>
-            </div>
-        </div>
-
-        <!-- Main weather card -->
-        <div class="m-main-card">
-            <p class="m-city-label" id="m-city-val">📍 -</p>
-            <button class="pin-btn m-pin-btn" title="Save this location">＋</button>
-            <div class="m-temp-display" id="m-temp-val">-</div>
-            <div class="m-icon-row">
-                <img id="m-weather-icon" src="" alt="" style="display:none" width="0" height="0">
-                <span class="weather-emoji"></span>
-                <span class="m-icon-condition" id="m-icon-condition-val">-</span>
             </div>
         </div>
 
