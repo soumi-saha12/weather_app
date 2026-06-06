@@ -167,15 +167,6 @@
         <div class="loading-spinner" id="mobile-loading"></div>
         <div class="error-msg" id="mobile-error"></div>
 
-        <!-- Mobile-only top weather info -->
-        <div class="m-top-info">
-            <div class="m-city-row">
-                <span class="m-city-label" id="m-city-val">📍 -</span>
-                <button class="pin-btn m-pin-btn" title="Save this location">＋</button>
-            </div>
-            <div class="m-temp-display" id="m-temp-val">-</div>
-        </div>
-
         <!-- Weather tag -->
         <div class="m-weather-tag" id="m-weather-tag">Weather Forecast</div>
 
@@ -192,6 +183,15 @@
         <div class="m-condition-icon-row">
             <span class="weather-emoji" id="m-mobile-emoji-label"></span>
             <span class="m-icon-condition" id="m-icon-condition-val">-</span>
+        </div>
+
+        <!-- Mobile-only top weather info -->
+        <div class="m-top-info">
+            <div class="m-city-row">
+                <span class="m-city-label" id="m-city-val">📍 -</span>
+                <button class="pin-btn m-pin-btn" title="Save this location">＋</button>
+            </div>
+            <div class="m-temp-display" id="m-temp-val">-</div>
         </div>
 
         <!-- Stats row -->
@@ -227,6 +227,14 @@
                 <span class="md-label">Feels Like</span>
                 <span class="md-value" id="m-feels-val-2">-</span>
             </div>
+        </div>
+
+        <div class="saved-locations m-saved-locations">
+            <div class="saved-header">
+                <span>📌 Saved Locations</span>
+                <span class="saved-hint">MAX 5 CITIES</span>
+            </div>
+            <div class="saved-list m-saved-list"></div>
         </div>
 
         <!-- Last updated -->

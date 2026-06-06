@@ -825,13 +825,15 @@ body {
   position: absolute;
   top: 100%;
   left: 0;
-  right: 0;
+  right: auto;
+  width: calc(100% - 90px);
   background: #12121e;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 10px;
   overflow: hidden;
   z-index: 9999 !important;
   display: none;
+  font-size: 13px;
 }
 
 .m-history-dropdown.visible {
@@ -839,7 +841,7 @@ body {
 }
 
 .m-history-item {
-  padding: 10px 16px;
+  padding: 8px 14px;
   font-size: 13px;
   color: white;
   cursor: pointer;
@@ -878,23 +880,28 @@ body {
     display: none !important;
   }
 
-  /* Switch to single column and stack cards vertically with a 12px gap */
+  .m-icon-row, .m-condition-icon-row {
+    display: none !important;
+  }
+
+  .m-saved-locations {
+    margin: 0 20px 16px;
+  }
+
+  /* Stats row side-by-side flex layout */
   .m-stats-row {
-    flex-direction: column;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin: 0 20px 16px;
   }
 
   .m-stat-item {
-    display: flex;
-    flex-direction: row;
+    flex: 1;
+    min-width: 0;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
     padding: 16px; /* consistent padding */
-    width: 100%;
-  }
-
-  .m-stat-item .m-stat-value {
-    margin-left: auto; /* push value to the far right */
   }
 
   /* Scale down mobile typography */

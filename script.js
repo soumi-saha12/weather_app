@@ -749,37 +749,39 @@ function removeSavedCity(name) {
 }
 
 function renderSavedLocations() {
-    const list = document.querySelector(".saved-list");
-    if (!list) return;
+    const lists = document.querySelectorAll(".saved-list");
+    if (lists.length === 0) return;
     const saved = getSavedCities();
 
-    if (saved.length === 0) {
-        list.innerHTML = '<p class="saved-empty">No saved locations yet.</p>';
-        return;
-    }
+    lists.forEach(list => {
+        if (saved.length === 0) {
+            list.innerHTML = '<p class="saved-empty">No saved locations yet.</p>';
+            return;
+        }
 
-    list.innerHTML = "";
-    saved.forEach(city => {
-        const item = document.createElement("div");
-        item.className = "saved-city-item";
-        item.innerHTML = `
-      <span class="saved-city-name">📍 ${city.name}, ${city.country}</span>
-      <span class="saved-city-temp">${city.temp}${city.unitSymbol}</span>
-      <button class="saved-city-remove" title="Remove">✕</button>
-    `;
-        // Click city to fetch weather
-        item.addEventListener("click", (e) => {
-            if (e.target.classList.contains("saved-city-remove")) return;
-            if (dSearchInput) dSearchInput.value = city.name;
-            if (mSearchInput) mSearchInput.value = city.name;
-            fetchWeather(city.name, currentUnit);
-        });
-        // Remove button
-        item.querySelector(".saved-city-remove")
-            .addEventListener("click", (e) => {
-                e.stopPropagation();
-                removeSavedCity(city.name);
+        list.innerHTML = "";
+        saved.forEach(city => {
+            const item = document.createElement("div");
+            item.className = "saved-city-item";
+            item.innerHTML = `
+          <span class="saved-city-name">📍 ${city.name}, ${city.country}</span>
+          <span class="saved-city-temp">${city.temp}${city.unitSymbol}</span>
+          <button class="saved-city-remove" title="Remove">✕</button>
+        `;
+            // Click city to fetch weather
+            item.addEventListener("click", (e) => {
+                if (e.target.classList.contains("saved-city-remove")) return;
+                if (dSearchInput) dSearchInput.value = city.name;
+                if (mSearchInput) mSearchInput.value = city.name;
+                fetchWeather(city.name, currentUnit);
             });
-        list.appendChild(item);
+            // Remove button
+            item.querySelector(".saved-city-remove")
+                .addEventListener("click", (e) => {
+                    e.stopPropagation();
+                    removeSavedCity(city.name);
+                });
+            list.appendChild(item);
+        });
     });
 }
