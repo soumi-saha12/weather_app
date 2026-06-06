@@ -33,7 +33,7 @@ Built using JavaScript and the OpenWeatherMap API, the application
 combines dynamic weather visuals, responsive design, and intuitive 
 interactions to create a premium user experience.
 
-🔗 **[Live Demo](your-netlify-url-here)**
+🔗 **[Live Demo](https://weatheringboard.netlify.app/)**
 
 ---
 
@@ -94,6 +94,14 @@ interactions to create a premium user experience.
 
 ## 📸 Dashboard Highlights
 
+<div align="center">
+  <h3>🖥️ Desktop View</h3>
+  <img src="./assets/images/desktop-screenshot.png" alt="Desktop Weather Dashboard" width="100%">
+  <br><br>
+  <h3>📱 Mobile View</h3>
+  <img src="./assets/images/mobile-screenshot.png" alt="Mobile Weather Dashboard" width="45%">
+</div>
+
 ### 💎 Glassmorphism Design
 Elegant translucent cards with depth and clarity.
 
@@ -112,7 +120,7 @@ Temperature, humidity, wind speed, and feels-like at a glance.
 
 ### 📱 Fully Responsive
 Desktop shows a full immersive dashboard.
-Mobile collapses to a clean teal landscape card layout.
+Mobile collapses to a clean, dark glassmorphism dashboard matching the desktop style.
 
 ---
 
@@ -204,8 +212,6 @@ weather-dashboard/
 <div align="center">
 
 ### 🌙 Built with code, clouds, and coffee ☕
-
-<img src="https://media.giphy.com/media/3o7TKtnuHOHHUjR38Y/giphy.gif" width="180"/>
 
 ### Made by [Soumi Saha](https://soumi-saha.netlify.app)
 
