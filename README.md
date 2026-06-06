@@ -33,7 +33,7 @@ Built using JavaScript and the OpenWeatherMap API, the application
 combines dynamic weather visuals, responsive design, and intuitive 
 interactions to create a premium user experience.
 
-🔗 **[Live Demo](https://weatheringboard.netlify.app/)**
+🔗 **[Live Demo](https://weatheringboard.netlify.app)**
 
 ---
 
@@ -120,14 +120,14 @@ Temperature, humidity, wind speed, and feels-like at a glance.
 
 ### 📱 Fully Responsive
 Desktop shows a full immersive dashboard.
-Mobile collapses to a clean, dark glassmorphism dashboard matching the desktop style.
+Mobile shows a compact glassmorphism dashboard layout.
 
 ---
 
 ## 🚀 Installation (Local)
 
 ```bash
-git clone https://github.com/soumi-saha12/weather-dashboard.git
+git clone https://github.com/soumi-saha12/weather_app.git
 cd weather-dashboard
 ```
 
